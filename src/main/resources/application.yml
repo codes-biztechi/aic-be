@@ -1,0 +1,17 @@
+server:
+  address: localhost
+  port: 8080
+
+spring:
+  application:
+    name: aic-be
+  datasource:
+    url: jdbc:mysql://localhost:3306/aic
+    username: root
+    password: 1q2w3e4r!
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+jwt:
+  secretKey: 357638792F423F4428472B4B6250655368566D597133743677397A2443264629

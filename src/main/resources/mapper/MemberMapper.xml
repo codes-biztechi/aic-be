@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="biztechi.aic.repository.MemberRepository">
+    <resultMap id="Member" type="biztechi.aic.domain.Member">
+        <result property="id" column="member_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="role" column="role" javaType="biztechi.aic.constant.Role" typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
+    </resultMap>
+
+    <select id="findByUsername" resultMap="Member">
+        SELECT member_id,
+               username,
+               password,
+               name,
+               role
+        FROM Member
+    </select>
+</mapper>
