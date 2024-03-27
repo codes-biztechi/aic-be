@@ -3,14 +3,30 @@
 
 <mapper namespace="biztechi.aic.repository.post.PostMapper">
     <resultMap id="Post" type="biztechi.aic.domain.Post">
-        <result property="id" column="post_id"/>
+        <id property="id" column="post_id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
-        <result property="category" column="category" javaType="biztechi.aic.domain.Category" typeHandler=""/>
-<!--        <result property="createdBy" column="created_by" javaType="biztechi.aic.domain.Member"/>-->
-        <result property="createdAt" column="created_at"/>
-<!--        <result property="updatedBy" column="updated_by" javaType="biztechi.aic.domain.Member"/>-->
-        <result property="updatedAt" column="updated_at"/>
+        <result property="createdAt" column="created_at" javaType="java.time.LocalDateTime"/>
+        <result property="updatedAt" column="updated_at" javaType="java.time.LocalDateTime"/>
+        <collection property="category" ofType="biztechi.aic.domain.Category">
+            <id property="id" column="category_id"/>
+            <result property="code" column="category_code"/>
+            <result property="label" column="category_label"/>
+        </collection>
+        <collection property="createdBy" ofType="biztechi.aic.domain.Member">
+            <id property="id" column="created_by_id"/>
+            <result property="username" column="created_by_username"/>
+            <result property="password" column="created_by_password"/>
+            <result property="name" column="created_by_name"/>
+            <result property="role" column="created_by_role" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        </collection>
+        <collection property="updatedBy" ofType="biztechi.aic.domain.Member">
+            <id property="id" column="updated_by_id"/>
+            <result property="username" column="updated_by_username"/>
+            <result property="password" column="updated_by_password"/>
+            <result property="name" column="updated_by_name"/>
+            <result property="role" column="updated_by_role" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        </collection>
     </resultMap>
 
     <select id="findById" resultMap="Post">

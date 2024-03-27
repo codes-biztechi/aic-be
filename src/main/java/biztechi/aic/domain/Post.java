@@ -19,7 +19,7 @@ public class Post {
     private String content;
     private Category category;
     private Member createdBy;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private Member updatedBy;
     private LocalDateTime updatedAt;
 
@@ -32,7 +32,7 @@ public class Post {
                 .label(category.getLabel())
                 .creatorId(createdBy.getId())
                 .creator(createdBy.getName())
-                .createdAt(createAt)
+                .createdAt(createdAt)
                 .updaterId(updatedBy.getId())
                 .updater(updatedBy.getName())
                 .updatedAt(updatedAt)
