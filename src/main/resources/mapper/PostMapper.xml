@@ -29,24 +29,49 @@
         </collection>
     </resultMap>
 
+    <select id="findAll" resultMap="Post">
+        SELECT p.post_id,
+               p.title,
+               p.content,
+               c.category_id AS category_id,
+               c.code        AS category_code,
+               c.label       AS category_label,
+               cm.member_id  AS created_by_id,
+               cm.username   AS created_by_username,
+               cm.password   AS created_by_password,
+               cm.name       AS created_by_name,
+               cm.role       AS created_by_role,
+               p.created_at,
+               um.member_id  AS updated_by_id,
+               um.username   AS updated_by_username,
+               um.password   AS updated_by_password,
+               um.name       AS updated_by_name,
+               um.role       AS updated_by_role,
+               p.updated_at
+        FROM Post p
+                 LEFT JOIN Category c ON p.category = c.category_id
+                 LEFT JOIN Member cm ON p.created_by = cm.member_id
+                 LEFT JOIN Member um ON p.updated_by = um.member_id
+    </select>
+
     <select id="findById" resultMap="Post">
         SELECT p.post_id,
                p.title,
                p.content,
                c.category_id AS category_id,
-               c.code AS category_code,
-               c.label AS category_label,
-               cm.member_id AS created_by_id,
-               cm.username AS created_by_username,
-               cm.password AS created_by_password,
-               cm.name AS created_by_name,
-               cm.role AS created_by_role,
+               c.code        AS category_code,
+               c.label       AS category_label,
+               cm.member_id  AS created_by_id,
+               cm.username   AS created_by_username,
+               cm.password   AS created_by_password,
+               cm.name       AS created_by_name,
+               cm.role       AS created_by_role,
                p.created_at,
-               um.member_id AS updated_by_id,
-               um.username AS updated_by_username,
-               um.password AS updated_by_password,
-               um.name AS updated_by_name,
-               um.role AS updated_by_role,
+               um.member_id  AS updated_by_id,
+               um.username   AS updated_by_username,
+               um.password   AS updated_by_password,
+               um.name       AS updated_by_name,
+               um.role       AS updated_by_role,
                p.updated_at
         FROM Post p
                  LEFT JOIN Category c ON p.category = c.category_id

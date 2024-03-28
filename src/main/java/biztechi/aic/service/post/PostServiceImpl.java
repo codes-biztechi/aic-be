@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository dao;
+
+    @Override
+    public List<PostDto> findAll() {
+        return dao.findAll().stream().map(Post::getDto).toList();
+    }
 
     @Override
     public PostDto findById(Long id) {

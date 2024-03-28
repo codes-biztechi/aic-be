@@ -7,12 +7,19 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService service;
+
+    @GetMapping
+    public List<PostDto> getPosts() {
+        return service.findAll();
+    }
 
     @GetMapping("/{postId}")
     public PostDto getPost(@PathVariable Long postId) {
