@@ -55,6 +55,17 @@
         WHERE p.post_id = #{id}
     </select>
 
+    <update id="updateById">
+        UPDATE Post
+        SET title      = #{title},
+            content    = #{content},
+            category   = (SELECT category_id
+                          FROM Category
+                          WHERE code = #{categoryCode}),
+            updated_at = CURRENT_TIMESTAMP
+        WHERE post_id = #{id}
+    </update>
+
     <delete id="deleteById">
         DELETE FROM Post
         WHERE post_id = #{id}

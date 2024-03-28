@@ -1,11 +1,11 @@
 package biztechi.aic.error;
 
-import biztechi.aic.error.ErrorResponse;
 import biztechi.aic.error.exception.ResourceNotFoundException;
 import biztechi.aic.error.exception.ResourceUnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -35,13 +35,13 @@ public class GlobalControllerAdvice {
         );
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleUnknownException(Exception ex) {
-        log.error("Internal Server Error = {}", ex.getMessage());
-        return ResponseEntity.status(500).body(
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        log.error("Method argument not valid = {}", ex.getMessage());
+        return ResponseEntity.status(400).body(
                 ErrorResponse.builder()
-                        .code(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .message("Internal Server Error")
+                        .code(HttpStatus.BAD_REQUEST)
+                        .message("Request failed for validation")
                         .build()
         );
     }

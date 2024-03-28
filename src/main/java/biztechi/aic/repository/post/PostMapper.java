@@ -1,6 +1,7 @@
 package biztechi.aic.repository.post;
 
 import biztechi.aic.domain.Post;
+import biztechi.aic.model.request.UpdatePostDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
@@ -9,6 +10,8 @@ import java.util.Optional;
 public interface PostMapper {
 
     Optional<Post> findById(Long id);
+
+    void updateById(Long id, UpdatePostDto post);
 
     void deleteById(Long id);
 }
