@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface PostRepository {
 
     Optional<Post> findById(Long id);
+
+    void deleteById(Long id);
 }

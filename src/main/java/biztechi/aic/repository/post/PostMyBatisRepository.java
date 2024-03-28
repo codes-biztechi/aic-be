@@ -16,4 +16,9 @@ public class PostMyBatisRepository implements PostRepository {
     public Optional<Post> findById(Long id) {
         return mapper.findById(id);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        mapper.deleteById(id);
+    }
 }
